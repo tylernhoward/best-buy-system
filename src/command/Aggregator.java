@@ -1,30 +1,23 @@
 package command;
 
-import model.Menu;
-import model.MenuItem;
+import model.AbstractItem;
+import model.ShoppingCart;
 
 /**
  * Created by ehaywo1 on 3/30/2017.
  */
 public class Aggregator {
-    private Menu menu;
+    private ShoppingCart shoppingCart;
 
     public Aggregator() {
-        menu = new Menu();
+        shoppingCart = new ShoppingCart();
     }
 
-    public Menu getMenu() {
-        return menu;
+    public void add(AbstractItem abstractItem) {
+        shoppingCart.add(abstractItem);
     }
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+    public void remove(AbstractItem abstractItem) {
     }
 
-    public void add(MenuItem menuItem) {
-        menu.add(menuItem);
-    }
-
-    public void remove(MenuItem menuItem) {
-    }
 }

@@ -11,9 +11,14 @@ public class UserInterface {
     // Grab system interface singleton instance when UserInterface class loads
     private static SystemInterface systemInterface = SystemInterface.getInstance();
 
+    // Need a utility method that fills up the
+
     public static void main(String[] args) {
         // Initialize a new invoker with a new aggregator
         systemInterface.setInvoker(new Invoker(new Aggregator()));
+
+        // call invoker to initialize the store with items
+        systemInterface.getInvoker().initializeOnlineStore();
 
         // options loop
         displayOptions();
@@ -26,13 +31,6 @@ public class UserInterface {
             choice = scanner.next();
             switch (choice) {
                 case "1":
-                    System.out.println("Enter item name: ");
-                    String name = scanner.next();
-                    System.out.println("Is it vegetarian? (true or false)  ");
-                    String isVegetarian = scanner.next();
-                    String addedItem = systemInterface.addItem(name, Boolean.valueOf(isVegetarian));
-                    System.out.println("Successfully added " + addedItem);
-
                     break;
             }
 
@@ -47,9 +45,11 @@ public class UserInterface {
 
     private static void displayOptions() {
         System.out.println("Main menu");
-        System.out.println("1 - Add Items");
-        System.out.println("2 - Remove Items");
-        System.out.println("3 - Display items");
-        System.out.println("4 - Display number of vegetarian items");
+        System.out.println("1 - Display items in store"); // Use iterator design pattern
+        System.out.println("2 - Add item to cart"); // command
+        System.out.println("3 - Remove item from cart"); // command
+        System.out.println("4 - Display items in cart"); // command
+        System.out.println("5 - Check receipt"); // using decorater pattern
+        System.out.println("6 - Apply promo code"); // calculates new receipt total using strategy design pattern
     }
 }

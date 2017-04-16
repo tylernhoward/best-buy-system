@@ -1,5 +1,7 @@
 import command.Invoker;
-import model.MenuItem;
+import model.ElectronicItem;
+import model.ElectronicItemType;
+import model.AbstractItem;
 
 /**
  * Created by ealexhaywood on 4/15/17.
@@ -16,9 +18,9 @@ public class SystemInterface {
 
     private Invoker invoker;
 
-    public String addItem(String name, boolean isVegetarian) {
-        MenuItem item = invoker.addItem(new MenuItem(name, isVegetarian));
-        return item.toString();
+    public String addElectronicItem(String name, double price, ElectronicItemType type, String displayQuality, double screenSize) {
+        AbstractItem electronicItem = invoker.addItem(new ElectronicItem(name, price, type, displayQuality, screenSize));
+        return electronicItem.toString();
     }
 
     public void setInvoker(Invoker invoker) {
