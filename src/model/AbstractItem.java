@@ -7,12 +7,10 @@ public abstract class AbstractItem {
 
     protected String name;
     protected double price;
-    protected int inStock;
 
-    public AbstractItem(String name, double price, int inStock) {
+    public AbstractItem(String name, double price) {
         this.name = name;
         this.price = price;
-        this.inStock = inStock;
     }
 
     public String getName() {
@@ -29,14 +27,6 @@ public abstract class AbstractItem {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getInStock() {
-        return inStock;
-    }
-
-    public void setInStock(int inStock) {
-        this.inStock = inStock;
     }
 
     @Override

@@ -9,8 +9,8 @@ public class ClothingItem extends AbstractItem {
     private String size;
     private boolean youth;
 
-    public ClothingItem(String name, double price, int inStock, ClothingItemType clothingItemType, String size, boolean youth) {
-        super(name, price, inStock);
+    public ClothingItem(String name, double price, ClothingItemType clothingItemType, String size, boolean youth) {
+        super(name, price);
         this.clothingItemType = clothingItemType;
         this.size = size;
         this.youth = youth;

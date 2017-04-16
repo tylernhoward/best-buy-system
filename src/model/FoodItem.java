@@ -8,8 +8,8 @@ public class FoodItem extends AbstractItem {
     private FoodItemType foodItemType;
     private boolean vegetarian;
 
-    public FoodItem(String name, double price, int inStock, FoodItemType foodItemType, boolean vegetarian) {
-        super(name, price, inStock);
+    public FoodItem(String name, double price, FoodItemType foodItemType, boolean vegetarian) {
+        super(name, price);
         this.foodItemType = foodItemType;
         this.vegetarian = vegetarian;
     }

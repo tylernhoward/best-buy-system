@@ -9,8 +9,8 @@ public class ElectronicItem extends AbstractItem {
     private String displayQuality; // ex: 1080p
     private double screenSize; // 5 inches, 21 inches
 
-    public ElectronicItem(String name, double price, int inStock, ElectronicItemType electronicItemType, String displayQuality, double screenSize) {
-        super(name, price, inStock);
+    public ElectronicItem(String name, double price, ElectronicItemType electronicItemType, String displayQuality, double screenSize) {
+        super(name, price);
         this.electronicItemType = electronicItemType;
         this.displayQuality = displayQuality;
         this.screenSize = screenSize;

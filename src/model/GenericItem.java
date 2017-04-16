@@ -6,7 +6,7 @@ package model;
  * Created by ealexhaywood on 4/16/17.
  */
 public class GenericItem extends AbstractItem {
-    public GenericItem(String name, double price, int inStock) {
-        super(name, price, inStock);
+    public GenericItem(String name, double price) {
+        super(name, price);
     }
 }
