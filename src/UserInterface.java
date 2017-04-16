@@ -1,3 +1,6 @@
+import command.Aggregator;
+import command.Invoker;
+
 import java.util.Scanner;
 
 /**
@@ -5,10 +8,12 @@ import java.util.Scanner;
  */
 public class UserInterface {
 
-    public static void main(String[] args) {
-        Invoker invoker = new Invoker(new Aggregator());
+    // Grab system interface singleton instance when UserInterface class loads
+    private static SystemInterface systemInterface = SystemInterface.getInstance();
 
-        SystemInterface.setInvoker(invoker);
+    public static void main(String[] args) {
+        // Initialize a new invoker with a new aggregator
+        systemInterface.setInvoker(new Invoker(new Aggregator()));
 
         // options loop
         displayOptions();
@@ -25,7 +30,7 @@ public class UserInterface {
                     String name = scanner.next();
                     System.out.println("Is it vegetarian? (true or false)  ");
                     String isVegetarian = scanner.next();
-                    String addedItem = SystemInterface.addItem(name, Boolean.valueOf(isVegetarian));
+                    String addedItem = systemInterface.addItem(name, Boolean.valueOf(isVegetarian));
                     System.out.println("Successfully added " + addedItem);
 
                     break;
