@@ -1,5 +1,6 @@
 import command.Aggregator;
 import command.Invoker;
+import model.OnlineStore;
 
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class UserInterface {
     // Grab system interface singleton instance when UserInterface class loads
     private static SystemInterface systemInterface = SystemInterface.getInstance();
 
-    // Need a utility method that fills up the
+    private static OnlineStore onlineStore;
 
     public static void main(String[] args) {
         // Initialize a new invoker with a new aggregator
