@@ -2,6 +2,7 @@ package model;
 
 import iterators.OnlineStoreIterator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class OnlineStore {
 
     // Holds a map of <Item, # of items in stock> pairs
-    private List<AbstractItem> inventory;
+    protected List<AbstractItem> inventory;
 
     public OnlineStore() {
     }

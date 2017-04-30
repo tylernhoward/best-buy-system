@@ -32,7 +32,7 @@ public class Invoker {
     }
 
     public AbstractItem addItem(AbstractItem menuAbstractItem) {
-        CommandInterface command = new CMDAddCartItem(aggregator, menuAbstractItem);
+        command = new CMDAddCartItem(aggregator, menuAbstractItem);
         // instanceof
         Object item = command.execute();
         if (item instanceof AbstractItem) {

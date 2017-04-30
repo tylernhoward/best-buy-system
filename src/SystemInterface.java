@@ -18,8 +18,8 @@ public class SystemInterface {
 
     private Invoker invoker;
 
-    public String addElectronicItem(String name, double price, ElectronicItemType type, String displayQuality, double screenSize) {
-        AbstractItem electronicItem = invoker.addItem(new ElectronicItem(name, price, type, displayQuality, screenSize));
+    public String addElectronicItem(ElectronicItem item) {
+        AbstractItem electronicItem = invoker.addItem(item);
         return electronicItem.toString();
     }
 
