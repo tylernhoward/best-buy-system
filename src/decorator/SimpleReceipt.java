@@ -8,6 +8,8 @@ package decorator;
 public class SimpleReceipt implements Receipt {
     @Override
     public void printReceipt() {
-
+        System.out.println("***Printing Simple Receipt***");
+        System.out.println();
+        System.out.println("");
     }
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 public class OnlineStore {
 
     // Holds a map of <Item, # of items in stock> pairs
-    protected List<AbstractItem> inventory;
+    private List<AbstractItem> inventory;
 
     public OnlineStore() {
     }
