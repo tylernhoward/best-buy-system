@@ -1,5 +1,7 @@
 package decorator;
 
+import model.Order;
+
 /**
  * Abstract receipt decorate class.  To be extended by decorators
  *
@@ -12,8 +14,7 @@ public abstract class ReceiptDecorator implements Receipt {
         this.receipt = receipt;
     }
 
-    @Override
-    public void printReceipt() {
-        receipt.printReceipt();
+    public void printReceipt(Order order) {
+        receipt.printReceipt(order);
     }
 }

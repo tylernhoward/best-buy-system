@@ -1,5 +1,7 @@
 package decorator;
 
+import model.Order;
+
 /**
  * A receipt with ALL possible information
  *
@@ -7,7 +9,7 @@ package decorator;
  */
 public class FullDetailedReceipt implements Receipt {
     @Override
-    public void printReceipt() {
+    public void printReceipt(Order order) {
 
     }
 }
