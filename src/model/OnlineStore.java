@@ -1,12 +1,8 @@
 package model;
 
-import iterators.AllItemsIterator;
 import iterators.OnlineStoreIterator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ehaywo1 on 3/30/2017.
@@ -32,6 +28,38 @@ public class OnlineStore {
         return new AllItemsIterator(items);
     }
 
+    public OnlineStoreIterator getElectronicItemsIterator() {
+        return new ElectronicItemsIterator();
+    }
+
+    public OnlineStoreIterator getElectronicItemsIterator(List<AbstractItem> items) {
+        return new ElectronicItemsIterator(items);
+    }
+
+    public OnlineStoreIterator getClothingItemsIterator() {
+        return new ClothingItemsIterator();
+    }
+
+    public OnlineStoreIterator getClothingItemsIterator(List<AbstractItem> items) {
+        return new ClothingItemsIterator(items);
+    }
+
+    public OnlineStoreIterator getFoodItemsIterator() {
+        return new FoodItemsIterator();
+    }
+
+    public OnlineStoreIterator getFoodItemsIterator(List<AbstractItem> items) {
+        return new FoodItemsIterator(items);
+    }
+
+    public OnlineStoreIterator getGenericItemsIterator() {
+        return new GenericItemsIterator();
+    }
+
+    public OnlineStoreIterator getGenericItemsIterator(List<AbstractItem> items) {
+        return new GenericItemsIterator(items);
+    }
+
 
     private class AllItemsIterator implements OnlineStoreIterator {
 
@@ -48,12 +76,15 @@ public class OnlineStore {
 
         @Override
         public boolean hasNext() {
+            if (index < items.size()) {
+                return true;
+            }
             return false;
         }
 
         @Override
         public AbstractItem next() {
-            return null;
+            return items.get(index++);
         }
     }
 
@@ -72,12 +103,18 @@ public class OnlineStore {
 
         @Override
         public boolean hasNext() {
+            for (int i = index; i < items.size(); i++) {
+                if (items.get(i) instanceof ElectronicItem) {
+                    index = i;
+                    return true;
+                }
+            }
             return false;
         }
 
         @Override
         public AbstractItem next() {
-            return null;
+            return items.get(index++);
         }
     }
 
@@ -96,12 +133,18 @@ public class OnlineStore {
 
         @Override
         public boolean hasNext() {
+            for (int i = index; i < items.size(); i++) {
+                if (items.get(i) instanceof ClothingItem) {
+                    index = i;
+                    return true;
+                }
+            }
             return false;
         }
 
         @Override
         public AbstractItem next() {
-            return null;
+            return items.get(index++);
         }
     }
 
@@ -120,12 +163,18 @@ public class OnlineStore {
 
         @Override
         public boolean hasNext() {
+            for (int i = index; i < items.size(); i++) {
+                if (items.get(i) instanceof FoodItem) {
+                    index = i;
+                    return true;
+                }
+            }
             return false;
         }
 
         @Override
         public AbstractItem next() {
-            return null;
+            return items.get(index++);
         }
     }
 
@@ -145,17 +194,20 @@ public class OnlineStore {
 
         @Override
         public boolean hasNext() {
+            for (int i = index; i < items.size(); i++) {
+                if (items.get(i) instanceof GenericItem) {
+                    index = i;
+                    return true;
+                }
+            }
             return false;
         }
 
         @Override
         public AbstractItem next() {
-            return null;
+            return items.get(index++);
         }
     }
-
-    // More iterators here...
-
 
     public List<AbstractItem> getInventory() {
         return inventory;
