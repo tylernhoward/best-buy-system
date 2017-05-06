@@ -1,7 +1,12 @@
 import command.Aggregator;
 import command.Invoker;
+import model.AbstractItem;
+import model.ElectronicItem;
+import model.ElectronicItemType;
 import model.OnlineStore;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,8 +23,8 @@ public class UserInterface {
         // Initialize a new invoker with a new aggregator
         systemInterface.setInvoker(new Invoker(new Aggregator()));
 
-        // call invoker to initialize the store with items
-        systemInterface.getInvoker().initializeOnlineStore();
+        // initialize the store with items
+        initializeOnlineStore();
 
         // options loop
         displayOptions();
@@ -52,5 +57,20 @@ public class UserInterface {
         System.out.println("4 - Display items in cart"); // command
         System.out.println("5 - Check receipt"); // using decorater pattern
         System.out.println("6 - Apply promo code"); // calculates new receipt total using strategy design pattern
+    }
+
+    private static void initializeOnlineStore() {
+        OnlineStore onlineStore = new OnlineStore();
+
+        List<AbstractItem> inventory = new ArrayList<>();
+        // example: Add iphone7 item, 6 in stock
+        inventory.add(new ElectronicItem("iPhone 7", 699.00, ElectronicItemType.CELL_PHONE, "720p", 5.0));
+        // more items here
+
+
+
+
+
+        onlineStore.setInventory(inventory);
     }
 }

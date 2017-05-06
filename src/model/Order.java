@@ -9,6 +9,7 @@ import java.util.UUID;
  * Created by ealexhaywood on 5/1/17.
  */
 public class Order {
+    private OnlineStore onlineStore;
     private String user;
     private List<AbstractItem> orderedItems;
     private UUID orderNumber;
@@ -17,7 +18,8 @@ public class Order {
 
     private final SimpleDateFormat mdyFormat = new SimpleDateFormat("MM-dd-yyyy");
 
-    public Order(String user, List<AbstractItem> orderedItems) {
+    public Order(OnlineStore onlineStore, String user, List<AbstractItem> orderedItems) {
+        this.onlineStore = onlineStore;
         this.user = user;
         this.orderedItems = orderedItems;
         this.orderNumber = UUID.randomUUID();
@@ -34,6 +36,14 @@ public class Order {
 
         // Round to two decimal places
         return Math.round(total * 100.0) / 100.0;
+    }
+
+    public OnlineStore getOnlineStore() {
+        return onlineStore;
+    }
+
+    public void setOnlineStore(OnlineStore onlineStore) {
+        this.onlineStore = onlineStore;
     }
 
     public String getUser() {

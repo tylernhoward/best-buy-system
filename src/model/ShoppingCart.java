@@ -17,4 +17,12 @@ public class ShoppingCart {
     public void add(AbstractItem abstractItem) {
         abstractItems.add(abstractItem);
     }
+
+    public void remove(AbstractItem abstractItem) {
+        abstractItems.remove(abstractItem);
+    }
+
+    public List<AbstractItem> get() {
+        return abstractItems;
+    }
 }

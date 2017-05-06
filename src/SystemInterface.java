@@ -16,18 +16,23 @@ public class SystemInterface {
     private SystemInterface() {
     }
 
-    private Invoker invoker;
+    private static Invoker invoker;
 
-    public String addElectronicItem(ElectronicItem item) {
-        AbstractItem electronicItem = invoker.addItem(item);
-        return electronicItem.toString();
+    public static String addItem(AbstractItem item) {
+        AbstractItem abstractItem = invoker.addItem(item);
+        return abstractItem.toString();
     }
 
-    public void setInvoker(Invoker invoker) {
-        this.invoker = invoker;
+    public static String removeItem(AbstractItem item) {
+        AbstractItem abstractItem = invoker.removeItem(item);
+        return abstractItem.toString();
     }
 
-    public Invoker getInvoker() {
+    public static void setInvoker(Invoker invoker) {
+        SystemInterface.invoker = invoker;
+    }
+
+    public static Invoker getInvoker() {
         return invoker;
     }
 }

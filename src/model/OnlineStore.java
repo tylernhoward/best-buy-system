@@ -1,5 +1,6 @@
 package model;
 
+import iterators.AllItemsIterator;
 import iterators.OnlineStoreIterator;
 
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import java.util.Map;
  */
 public class OnlineStore {
 
-    // Holds a map of <Item, # of items in stock> pairs
     private List<AbstractItem> inventory;
 
     public OnlineStore() {
@@ -24,9 +24,18 @@ public class OnlineStore {
 
     // public access factory methods for iterators here...
 
+    public OnlineStoreIterator getAllItemsIterator(List<AbstractItem> items) {
+        return new AllItemsIterator(items);
+    }
 
 
     private class AllItemsIterator implements OnlineStoreIterator {
+
+        private List<AbstractItem> items;
+
+        public AllItemsIterator(List<AbstractItem> items) {
+            this.items = items;
+        }
 
         @Override
         public boolean hasNext() {

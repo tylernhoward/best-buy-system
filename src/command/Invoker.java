@@ -1,5 +1,6 @@
 package command;
 
+import exceptions.CommandInterfaceException;
 import model.AbstractItem;
 import model.ElectronicItem;
 import model.ElectronicItemType;
@@ -16,11 +17,43 @@ import java.util.Map;
 public class Invoker {
 
     private Aggregator aggregator;
-
     private CommandInterface command;
 
     public Invoker(Aggregator aggregator) {
         this.aggregator = aggregator;
+    }
+
+    public AbstractItem addItem(AbstractItem item) {
+        command = new CMDAddCartItem(item, aggregator);
+
+        Object addedItem = command.execute();
+        if (addedItem instanceof AbstractItem) {
+            return (AbstractItem) addedItem;
+        } else {
+            throw new CommandInterfaceException("Unable to determine returned object type after executing command.");
+        }
+    }
+
+    public AbstractItem removeItem(AbstractItem item) {
+        command = new CMDRemoveCartItem(item, aggregator);
+
+        Object removedItem = command.execute();
+        if (removedItem instanceof AbstractItem) {
+            return (AbstractItem) removedItem;
+        } else {
+            throw new CommandInterfaceException("Unable to determine returned object type after executing command.");
+        }
+    }
+
+    public List<AbstractItem> getItems() {
+        command = new CMDGetCartItems(aggregator);
+
+        Object items = command.execute();
+        if (items instanceof List) {
+            return (List<AbstractItem>) items;
+        } else {
+            throw new CommandInterfaceException("Unable to determine returned object type after executing command.");
+        }
     }
 
     public Aggregator getAggregator() {
@@ -29,31 +62,5 @@ public class Invoker {
 
     public void setAggregator(Aggregator aggregator) {
         this.aggregator = aggregator;
-    }
-
-    public AbstractItem addItem(AbstractItem menuAbstractItem) {
-        command = new CMDAddCartItem(aggregator, menuAbstractItem);
-        // instanceof
-        Object item = command.execute();
-        if (item instanceof AbstractItem) {
-            return (AbstractItem) item;
-        } else {
-            throw new RuntimeException("problem");
-        }
-    }
-
-    public void initializeOnlineStore() {
-        OnlineStore onlineStore = new OnlineStore();
-
-        List<AbstractItem> inventory = new ArrayList<>();
-        // example: Add iphone7 item, 6 in stock
-        inventory.add(new ElectronicItem("iPhone 7", 699.00, ElectronicItemType.CELL_PHONE, "720p", 5.0));
-        // more items here
-
-
-
-
-
-        onlineStore.setInventory(inventory);
     }
 }

@@ -10,7 +10,7 @@ public class CMDAddCartItem implements CommandInterface {
     private AbstractItem abstractItem;
     private Aggregator aggregator;
 
-    public CMDAddCartItem(Aggregator aggregator, AbstractItem abstractItem) {
+    public CMDAddCartItem(AbstractItem abstractItem, Aggregator aggregator) {
         this.abstractItem = abstractItem;
         this.aggregator = aggregator;
     }
