@@ -1,5 +1,6 @@
 package system;
 
+import command.Aggregator;
 import command.Invoker;
 import iterators.OnlineStoreIterator;
 import model.*;
@@ -57,11 +58,15 @@ public class SystemInterface {
         onlineStore.setInventory(inventory);
     }
 
-    public static void setInvoker(Invoker invoker) {
+    private static void setInvoker(Invoker invoker) {
         SystemInterface.invoker = invoker;
     }
 
     public static void printSimpleReceipt(String type) {
         invoker.printSimpleReceipt(type);
+    }
+
+    public static void initialize() {
+        setInvoker(new Invoker(new Aggregator()));
     }
 }

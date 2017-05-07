@@ -1,5 +1,3 @@
-import command.Aggregator;
-import command.Invoker;
 import system.SystemInterface;
 
 import java.util.InputMismatchException;
@@ -13,7 +11,7 @@ public class UserInterface {
 
     public static void main(String[] args) {
         // Initialize a new invoker with a new aggregator
-        SystemInterface.setInvoker(new Invoker(new Aggregator()));
+        SystemInterface.initialize();
 
         // initialize the store with items
         SystemInterface.initializeOnlineStore();
@@ -59,7 +57,7 @@ public class UserInterface {
                         break;
                     case 5:
                         beginCheckoutProcess();
-                        SystemInterface.setInvoker(new Invoker(new Aggregator()));
+                        SystemInterface.initialize();
                         break;
                     case 6:
                         break;
