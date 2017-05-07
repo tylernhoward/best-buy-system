@@ -56,7 +56,8 @@ public class UserInterface {
                         printCartItems(SystemInterface.getCartItems());
                         break;
                     case 5:
-                        beginCheckoutProcess();
+                        checkoutProcess();
+                        System.out.println("Your shopping cart has been emptied and is ready for another order!");
                         SystemInterface.initialize();
                         break;
                     case 6:
@@ -87,7 +88,7 @@ public class UserInterface {
         } while (promptUser);
     }
 
-    private static void beginCheckoutProcess() {
+    private static void checkoutProcess() {
         if (SystemInterface.getCartItems() == null || SystemInterface.getCartItems().size() == 0) {
             System.out.println("Nothing to check out.  You have no items in your cart.");
         } else {
@@ -156,7 +157,7 @@ public class UserInterface {
         System.out.println("3 - Decorate with electronic items");
         System.out.println("4 - Decorate with food items");
         System.out.println("5 - Decorate with generic items");
-        System.out.println("0 - Exit");
+        System.out.println("0 - Purchase and exit");
         System.out.println();
     }
 
