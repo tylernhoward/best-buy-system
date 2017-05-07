@@ -1,7 +1,6 @@
 package system;
 
 import command.Invoker;
-import decorator.Receipt;
 import iterators.OnlineStoreIterator;
 import model.*;
 
@@ -16,7 +15,6 @@ public class SystemInterface {
 
     private static Invoker invoker;
     private static OnlineStore onlineStore;
-    private static Receipt receipt;
 
     public static String addItem(int index) {
         AbstractItem abstractItem = invoker.addItem(onlineStore.getInventory().get(index));

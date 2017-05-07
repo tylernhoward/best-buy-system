@@ -2,10 +2,7 @@ package decorator;
 
 import iterators.OnlineStoreIterator;
 import model.AbstractItem;
-import model.FoodItem;
 import model.Order;
-
-import java.util.List;
 
 /**
  * Created by ealexhaywood on 5/1/17.

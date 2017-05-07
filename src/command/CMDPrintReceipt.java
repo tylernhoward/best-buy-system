@@ -1,8 +1,6 @@
 package command;
 
-import decorator.AllItemDecorator;
 import decorator.Receipt;
-import decorator.SimpleReceipt;
 import model.Order;
 
 /**
