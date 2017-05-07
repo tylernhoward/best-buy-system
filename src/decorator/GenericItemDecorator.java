@@ -1,5 +1,6 @@
 package decorator;
 
+import iterators.OnlineStoreIterator;
 import model.AbstractItem;
 import model.GenericItem;
 import model.Order;
@@ -21,18 +22,18 @@ public class GenericItemDecorator extends ReceiptDecorator {
     }
 
     private void printGenericItems(Order order) {
-        List<AbstractItem> items = order.getOrderedItems();
-
         boolean hasGenericItems = false;
 
-        // TODO - replace this with iterators when implemented
         System.out.println("*** GENERIC ITEMS ***");
         System.out.println("ITEM\tPRICE"); // headers
-        for (AbstractItem item : items) {
-            if (item instanceof GenericItem) {
-                hasGenericItems = true;
-                System.out.println(item.getName() + "\t$" + item.getPrice());
-            }
+
+        OnlineStoreIterator itr = order.getOnlineStore().getGenericItemsIterator(order.getOrderedItems());
+
+        while (itr.hasNext()) {
+            hasGenericItems = true;
+
+            AbstractItem item = itr.next();
+            System.out.println(item.getName() + "\t$" + item.getPrice());
         }
 
         // If it doesn't have generic items, print that it has none

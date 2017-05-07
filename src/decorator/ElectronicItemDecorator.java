@@ -1,5 +1,6 @@
 package decorator;
 
+import iterators.OnlineStoreIterator;
 import model.AbstractItem;
 import model.ElectronicItem;
 import model.Order;
@@ -21,18 +22,18 @@ public class ElectronicItemDecorator extends ReceiptDecorator {
     }
 
     private void printElectronicItems(Order order) {
-        List<AbstractItem> items = order.getOrderedItems();
-
         boolean hasElectronicItems = false;
 
-        // TODO - replace this with iterators when implemented
         System.out.println("*** ELECTRONIC ITEMS ***");
         System.out.println("ITEM\tPRICE"); // headers
-        for (AbstractItem item : items) {
-            if (item instanceof ElectronicItem) {
-                hasElectronicItems = true;
-                System.out.println(item.getName() + "\t$" + item.getPrice());
-            }
+
+        OnlineStoreIterator itr = order.getOnlineStore().getElectronicItemsIterator(order.getOrderedItems());
+
+        while (itr.hasNext()) {
+            hasElectronicItems = true;
+
+            AbstractItem item = itr.next();
+            System.out.println(item.getName() + "\t$" + item.getPrice());
         }
 
         // If it doesn't have electronic items, print that it has none

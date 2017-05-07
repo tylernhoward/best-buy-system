@@ -1,5 +1,6 @@
 package decorator;
 
+import iterators.OnlineStoreIterator;
 import model.AbstractItem;
 import model.FoodItem;
 import model.Order;
@@ -21,18 +22,18 @@ public class FoodItemDecorator extends ReceiptDecorator {
     }
 
     private void printFoodItems(Order order) {
-        List<AbstractItem> items = order.getOrderedItems();
-
         boolean hasFoodItems = false;
 
-        // TODO - replace this with iterators when implemented
         System.out.println("*** FOOD ITEMS ***");
         System.out.println("ITEM\tPRICE"); // headers
-        for (AbstractItem item : items) {
-            if (item instanceof FoodItem) {
-                hasFoodItems = true;
-                System.out.println(item.getName() + "\t$" + item.getPrice());
-            }
+
+        OnlineStoreIterator itr = order.getOnlineStore().getFoodItemsIterator(order.getOrderedItems());
+
+        while (itr.hasNext()) {
+            hasFoodItems = true;
+
+            AbstractItem item = itr.next();
+            System.out.println(item.getName() + "\t$" + item.getPrice());
         }
 
         // If it doesn't have food items, print that it has none

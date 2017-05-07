@@ -1,5 +1,6 @@
 package decorator;
 
+import iterators.OnlineStoreIterator;
 import model.AbstractItem;
 import model.ClothingItem;
 import model.Order;
@@ -21,12 +22,12 @@ public class AllItemDecorator extends ReceiptDecorator {
     }
 
     private void printAllItems(Order order) {
-        List<AbstractItem> items = order.getOrderedItems();
-
-        // TODO - replace this with iterators when implemented
         System.out.println("*** ALL ITEMS ***");
         System.out.println("ITEM\tTYPE\tPRICE"); // headers
-        for (AbstractItem item : items) {
+
+        OnlineStoreIterator itr = order.getOnlineStore().getAllItemsIterator(order.getOrderedItems());
+        while (itr.hasNext()) {
+            AbstractItem item = itr.next();
             System.out.println(item.getName() + "\t" + item.getClass().getSimpleName() + "\t$" + item.getPrice());
         }
 
