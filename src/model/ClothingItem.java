@@ -39,4 +39,10 @@ public class ClothingItem extends AbstractItem {
     public void setYouth(boolean youth) {
         this.youth = youth;
     }
+
+    @Override
+    public String toString() {
+        return "[Name = " + name + ", Price = $" + price + ", Type = " + clothingItemType.toString()
+                + ", Size = " + size + ", Youth = " + youth + "]";
+    }
 }

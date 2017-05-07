@@ -39,4 +39,10 @@ public class ElectronicItem extends AbstractItem {
     public void setScreenSize(double screenSize) {
         this.screenSize = screenSize;
     }
+
+    @Override
+    public String toString() {
+        return "[Name = " + name + ", Price = $" + price + ", Type = " + electronicItemType.toString()
+                + ", Display Quality  = " + displayQuality + ", Screen Size = " + screenSize + " inches]";
+    }
 }

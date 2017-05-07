@@ -77,6 +77,7 @@ public class UserInterface {
     }
 
     private static void displayItemsInStore() {
+        System.out.println();
         System.out.println("***DISPLAYING ITEMS IN STORE***");
         OnlineStoreIterator itr = onlineStore.getAllItemsIterator();
 

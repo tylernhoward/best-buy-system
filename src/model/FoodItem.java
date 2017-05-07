@@ -29,4 +29,10 @@ public class FoodItem extends AbstractItem {
     public void setVegetarian(boolean vegetarian) {
         this.vegetarian = vegetarian;
     }
+
+    @Override
+    public String toString() {
+        return "[Name = " + name + ", Price = $" + price + ", Type = " + foodItemType.toString()
+                + ", Vegetarian = " + vegetarian + "]";
+    }
 }
