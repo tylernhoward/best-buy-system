@@ -1,5 +1,7 @@
 package command;
 
+import decorator.Receipt;
+import decorator.SimpleReceipt;
 import model.AbstractItem;
 import model.ShoppingCart;
 
@@ -10,9 +12,11 @@ import java.util.List;
  */
 public class Aggregator {
     private ShoppingCart shoppingCart;
+    private Receipt receipt;
 
     public Aggregator() {
         shoppingCart = new ShoppingCart();
+        receipt = new SimpleReceipt();
     }
 
     public void add(AbstractItem abstractItem) {
@@ -27,4 +31,11 @@ public class Aggregator {
         return shoppingCart.getAll();
     }
 
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
+    }
+
+    public Receipt getReceipt() {
+        return receipt;
+    }
 }

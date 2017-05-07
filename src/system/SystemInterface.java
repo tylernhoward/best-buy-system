@@ -1,4 +1,7 @@
+package system;
+
 import command.Invoker;
+import decorator.Receipt;
 import iterators.OnlineStoreIterator;
 import model.*;
 
@@ -13,24 +16,20 @@ public class SystemInterface {
 
     private static Invoker invoker;
     private static OnlineStore onlineStore;
+    private static Receipt receipt;
 
-    public static String addItem(AbstractItem item) {
-        AbstractItem abstractItem = invoker.addItem(item);
+    public static String addItem(int index) {
+        AbstractItem abstractItem = invoker.addItem(onlineStore.getInventory().get(index));
         return abstractItem.toString();
     }
 
-    public static String removeItem(AbstractItem item) {
-        AbstractItem abstractItem = invoker.removeItem(item);
+    public static String removeItem(int index) {
+        AbstractItem abstractItem = invoker.removeItem(invoker.getAggregator().getAll().get(index));
         return abstractItem.toString();
     }
 
     public static List<String> getCartItems() {
         return invoker.getItems().stream().map(item -> item.toString()).collect(Collectors.toList());
-    }
-
-
-    public static AbstractItem getShoppingCartItemByIndex(int itemNumber) {
-        return invoker.getAggregator().getAll().get(itemNumber);
     }
 
     public static void displayItemsInStore() {
@@ -64,15 +63,11 @@ public class SystemInterface {
         SystemInterface.invoker = invoker;
     }
 
-    public static Invoker getInvoker() {
-        return invoker;
-    }
-
     public static OnlineStore getOnlineStore() {
         return onlineStore;
     }
 
-    public static void setOnlineStore(OnlineStore onlineStore) {
-        SystemInterface.onlineStore = onlineStore;
+    public static void printSimpleReceipt(String type) {
+        invoker.printSimpleReceipt(type);
     }
 }

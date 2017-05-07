@@ -1,15 +1,11 @@
 package command;
 
+import decorator.*;
 import exceptions.CommandInterfaceException;
-import model.AbstractItem;
-import model.ElectronicItem;
-import model.ElectronicItemType;
-import model.OnlineStore;
+import model.*;
+import system.SystemInterface;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ehaywo1 on 3/30/2017.
@@ -51,6 +47,41 @@ public class Invoker {
         Object items = command.execute();
         if (items instanceof List) {
             return (List<AbstractItem>) items;
+        } else {
+            throw new CommandInterfaceException("Unable to determine returned object type after executing command.");
+        }
+    }
+
+    public Receipt printSimpleReceipt(String type) {
+
+        Receipt currentReceipt = aggregator.getReceipt();
+
+        switch (type) {
+            case "all":
+                aggregator.setReceipt(new AllItemDecorator(currentReceipt));
+                break;
+            case "clothing":
+                aggregator.setReceipt(new ClothingItemDecorator(currentReceipt));
+                break;
+            case "electronic":
+                aggregator.setReceipt(new ElectronicItemDecorator(currentReceipt));
+                break;
+            case "food":
+                aggregator.setReceipt(new FoodItemDecorator(currentReceipt));
+                break;
+            case "generic":
+                aggregator.setReceipt(new GenericItemDecorator(currentReceipt));
+                break;
+            default:
+                // do nothing
+                break;
+        }
+
+        command = new CMDPrintReceipt(aggregator.getReceipt(), new Order(SystemInterface.getOnlineStore(), "J. Cole", aggregator.getAll()));
+
+        Object receipt = command.execute();
+        if (receipt instanceof Receipt) {
+            return (Receipt) receipt;
         } else {
             throw new CommandInterfaceException("Unable to determine returned object type after executing command.");
         }
