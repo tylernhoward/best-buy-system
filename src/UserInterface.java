@@ -1,11 +1,10 @@
 import command.Aggregator;
 import command.Invoker;
-import model.AbstractItem;
-import model.ElectronicItem;
-import model.ElectronicItemType;
-import model.OnlineStore;
+import iterators.OnlineStoreIterator;
+import model.*;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,27 +25,67 @@ public class UserInterface {
         // initialize the store with items
         initializeOnlineStore();
 
-        // options loop
-        displayOptions();
-        
         Scanner scanner = new Scanner(System.in);
+        boolean promptUser = true;
 
-        String choice = "";
-        while (!choice.equals("0")) {
-            System.out.print("Enter in choice: ");
-            choice = scanner.next();
-            switch (choice) {
-                case "1":
-                    break;
-            }
-
-
+        do {
             displayOptions();
-        }
+            System.out.print("Enter in choice: ");
+
+            try {
+                int choice = scanner.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        displayItemsInStore();
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+
+                    // exit
+                    case 0:
+                        System.out.println("Exiting...");
+                        promptUser = false;
+                        break;
+
+                    // invalid/other choices
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+            } catch (InputMismatchException | NumberFormatException e) {
+                System.out.println("Your choice was not a number.");
+                scanner.next(); // consume the invalid token
+            }
+        } while (promptUser);
 
         // call system interface methods
 
         // display result
+    }
+
+    private static void displayItemsInStore() {
+        System.out.println("***DISPLAYING ITEMS IN STORE***");
+        OnlineStoreIterator itr = onlineStore.getAllItemsIterator();
+
+        int count = 1;
+        while (itr.hasNext()) {
+            System.out.println("Item #" + count++ + ": " + itr.next().toString());
+        }
+
+        System.out.println();
     }
 
     private static void displayOptions() {
@@ -60,17 +99,16 @@ public class UserInterface {
     }
 
     private static void initializeOnlineStore() {
-        OnlineStore onlineStore = new OnlineStore();
-
         List<AbstractItem> inventory = new ArrayList<>();
         // example: Add iphone7 item, 6 in stock
         inventory.add(new ElectronicItem("iPhone 7", 699.00, ElectronicItemType.CELL_PHONE, "720p", 5.0));
-        // more items here
-
-
-
-
-
-        onlineStore.setInventory(inventory);
+        inventory.add(new ElectronicItem("Surface Pro", 399.99, ElectronicItemType.LAPTOP, "1080p", 15.0));
+        inventory.add(new ClothingItem("Affliction T-Shirt", 39.99, ClothingItemType.SHIRT, "Large", false));
+        inventory.add(new ClothingItem("Spongebob Pants", 12.49, ClothingItemType.PANTS, "Medium", true));
+        inventory.add(new FoodItem("Frozen T-Bone Steak 6-Pack", 45.99, FoodItemType.MEAT, false));
+        inventory.add(new FoodItem("Fresh Spinach", 6.00, FoodItemType.VEGETABLES, true));
+        inventory.add(new GenericItem("Towels", 15.99));
+        inventory.add(new GenericItem("Bed Sheets", 29.99));
+        onlineStore = new OnlineStore(inventory);
     }
 }
