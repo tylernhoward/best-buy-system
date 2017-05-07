@@ -61,10 +61,6 @@ public class SystemInterface {
         SystemInterface.invoker = invoker;
     }
 
-    public static OnlineStore getOnlineStore() {
-        return onlineStore;
-    }
-
     public static void printSimpleReceipt(String type) {
         invoker.printSimpleReceipt(type);
     }

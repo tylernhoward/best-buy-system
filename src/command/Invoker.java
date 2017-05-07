@@ -3,6 +3,7 @@ package command;
 import decorator.*;
 import exceptions.CommandInterfaceException;
 import model.AbstractItem;
+import model.OnlineStore;
 import model.Order;
 import system.SystemInterface;
 
@@ -78,7 +79,7 @@ public class Invoker {
                 break;
         }
 
-        command = new CMDPrintReceipt(aggregator.getReceipt(), new Order(SystemInterface.getOnlineStore(), "J. Cole", aggregator.getAll()));
+        command = new CMDPrintReceipt(aggregator.getReceipt(), new Order(OnlineStore.getInstance(), "J. Cole", aggregator.getAll()));
 
         Object receipt = command.execute();
         if (receipt instanceof Receipt) {
