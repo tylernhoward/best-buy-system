@@ -9,16 +9,16 @@ import java.util.List;
  */
 public class OnlineStore {
 
+    private static OnlineStore onlineStore = new OnlineStore();
+
+    private OnlineStore() {
+    }
+
+    public static OnlineStore getInstance() {
+        return onlineStore;
+    }
+
     private List<AbstractItem> inventory;
-
-    public OnlineStore() {
-    }
-
-    public OnlineStore(List<AbstractItem> inventory) {
-        this.inventory = inventory;
-    }
-
-    // public access factory methods for iterators here...
 
     public OnlineStoreIterator getAllItemsIterator() {
         return new AllItemsIterator();

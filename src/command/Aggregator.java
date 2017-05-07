@@ -23,8 +23,8 @@ public class Aggregator {
         shoppingCart.remove(abstractItem);
     }
 
-    public List<AbstractItem> get() {
-        return shoppingCart.get();
+    public List<AbstractItem> getAll() {
+        return shoppingCart.getAll();
     }
 
 }

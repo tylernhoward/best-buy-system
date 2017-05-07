@@ -22,7 +22,7 @@ public class ShoppingCart {
         abstractItems.remove(abstractItem);
     }
 
-    public List<AbstractItem> get() {
+    public List<AbstractItem> getAll() {
         return abstractItems;
     }
 }

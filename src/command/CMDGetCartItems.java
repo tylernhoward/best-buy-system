@@ -17,6 +17,6 @@ public class CMDGetCartItems implements CommandInterface {
 
     @Override
     public List<AbstractItem> execute() {
-        return aggregator.get();
+        return aggregator.getAll();
     }
 }
