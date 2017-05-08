@@ -180,7 +180,6 @@ public class UserInterface {
         System.out.println("3 - Remove item from cart"); // command
         System.out.println("4 - Display items in cart"); // command
         System.out.println("5 - Checkout"); // using decorater pattern
-        System.out.println("6 - Apply promo code"); // calculates new receipt total using strategy design pattern
         System.out.println("0 - Exit");
         System.out.println();
     }
