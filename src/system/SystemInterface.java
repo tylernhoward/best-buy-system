@@ -31,6 +31,10 @@ public class SystemInterface {
         return invoker.getItems().stream().map(item -> item.toString()).collect(Collectors.toList());
     }
 
+    public static void printSimpleReceipt(String type) {
+        invoker.printSimpleReceipt(type);
+    }
+
     public static void displayItemsInStore() {
         System.out.println();
         System.out.println("***DISPLAYING ITEMS IN STORE***");
@@ -60,10 +64,6 @@ public class SystemInterface {
 
     private static void setInvoker(Invoker invoker) {
         SystemInterface.invoker = invoker;
-    }
-
-    public static void printSimpleReceipt(String type) {
-        invoker.printSimpleReceipt(type);
     }
 
     public static void initialize() {
