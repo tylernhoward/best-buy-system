@@ -34,6 +34,8 @@ public class Order {
             total += item.getPrice();
         }
 
+
+
         // Round to two decimal places
         return Math.round(total * 100.0) / 100.0;
     }
@@ -85,4 +87,5 @@ public class Order {
     public void setOrderTotal(double orderTotal) {
         this.orderTotal = orderTotal;
     }
+
 }
