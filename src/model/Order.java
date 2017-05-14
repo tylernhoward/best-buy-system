@@ -1,5 +1,7 @@
 package model;
 
+import strategy.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,31 +12,62 @@ import java.util.UUID;
  */
 public class Order {
     private OnlineStore onlineStore;
-    private String user;
+    private User user;
     private List<AbstractItem> orderedItems;
     private UUID orderNumber;
     private String date;
-    private double orderTotal;
+    private ShippingStrategy shippingStrategy;
+    private TaxStrategy taxStrategy;
+    private double subTotal;
+    private double shippingCost;
+    private double salesTax;
+    private double grandTotal;
 
-    private final SimpleDateFormat mdyFormat = new SimpleDateFormat("MM-dd-yyyy");
+    private static final SimpleDateFormat MDY_FORMAT = new SimpleDateFormat("MM-dd-yyyy");
+    private static final String DELAWARE = "Delaware";
+    private static final String MARYLAND = "Maryland";
+    private static final String NEW_YORK = "New York";
 
-    public Order(OnlineStore onlineStore, String user, List<AbstractItem> orderedItems) {
+    public Order(OnlineStore onlineStore, User user, List<AbstractItem> orderedItems) {
         this.onlineStore = onlineStore;
         this.user = user;
         this.orderedItems = orderedItems;
         this.orderNumber = UUID.randomUUID();
-        this.date = mdyFormat.format(new Date());
-        this.orderTotal = calculateTotal(orderedItems);
+        this.date = MDY_FORMAT.format(new Date());
+        this.subTotal = calculateSubTotal(orderedItems);
+        this.shippingStrategy = determineShippingStrategy(user);
+        this.shippingCost = shippingStrategy.calculateShippingCost(orderedItems);
+        this.taxStrategy = determineTaxStrategy(user);
+        this.salesTax = taxStrategy.calcSalesTax(subTotal);
+        this.grandTotal = subTotal + salesTax + shippingCost;
     }
 
-    private double calculateTotal(List<AbstractItem> orderedItems) {
+    private TaxStrategy determineTaxStrategy(User user) {
+        switch (user.getLocation()) {
+            case DELAWARE:
+                return new DETaxStrategy();
+            case MARYLAND:
+                return new MDTaxStrategy();
+            case NEW_YORK:
+                return new NYTaxStrategy();
+            default:
+                return new OtherStateTaxStrategy();
+        }
+    }
+
+    private ShippingStrategy determineShippingStrategy(User user) {
+        if (user.isPrime()) {
+            return new PrimeShippingStrategy();
+        }
+        return new RegularShippingStrategy();
+    }
+
+    private double calculateSubTotal(List<AbstractItem> orderedItems) {
         double total = 0.0;
 
         for (AbstractItem item : orderedItems) {
             total += item.getPrice();
         }
-
-
 
         // Round to two decimal places
         return Math.round(total * 100.0) / 100.0;
@@ -48,11 +81,11 @@ public class Order {
         this.onlineStore = onlineStore;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -80,12 +113,51 @@ public class Order {
         this.date = date;
     }
 
-    public double getOrderTotal() {
-        return orderTotal;
+    public double getSubTotal() {
+        return subTotal;
     }
 
-    public void setOrderTotal(double orderTotal) {
-        this.orderTotal = orderTotal;
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
     }
 
+    public double getShippingCost() {
+        return shippingCost;
+    }
+
+    public void setShippingCost(double shippingCost) {
+        this.shippingCost = shippingCost;
+    }
+
+    public double getSalesTax() {
+        return salesTax;
+    }
+
+    public void setSalesTax(double salesTax) {
+        this.salesTax = salesTax;
+    }
+
+    public double getGrandTotal() {
+        return grandTotal;
+    }
+
+    public void setGrandTotal(double grandTotal) {
+        this.grandTotal = grandTotal;
+    }
+
+    public ShippingStrategy getShippingStrategy() {
+        return shippingStrategy;
+    }
+
+    public void setShippingStrategy(ShippingStrategy shippingStrategy) {
+        this.shippingStrategy = shippingStrategy;
+    }
+
+    public TaxStrategy getTaxStrategy() {
+        return taxStrategy;
+    }
+
+    public void setTaxStrategy(TaxStrategy taxStrategy) {
+        this.taxStrategy = taxStrategy;
+    }
 }

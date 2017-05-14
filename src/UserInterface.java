@@ -1,3 +1,4 @@
+import model.User;
 import system.SystemInterface;
 
 import java.util.InputMismatchException;
@@ -18,6 +19,9 @@ public class UserInterface {
 
         Scanner scanner = new Scanner(System.in);
         boolean promptUser = true;
+
+        userLogin();
+        System.out.println("Logged in as:  " + SystemInterface.getUser());
 
         do {
             displayOptions();
@@ -88,11 +92,67 @@ public class UserInterface {
         } while (promptUser);
     }
 
+    private static void userLogin() {
+        Scanner scanner = new Scanner(System.in);
+
+        boolean promptUser = true;
+        do {
+            displayUsers();
+            System.out.print("Enter in choice: ");
+
+            try {
+                int choice = scanner.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        SystemInterface.loginAsJoe();
+                        promptUser = false;
+                        break;
+                    case 2:
+                        SystemInterface.loginAsPrime();
+                        promptUser = false;
+                        break;
+                    case 3:
+                        SystemInterface.loginAsDelaware();
+                        promptUser = false;
+                        break;
+                    case 4:
+                        SystemInterface.loginAsNY();
+                        promptUser = false;
+                        break;
+
+                    // invalid/other choices
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+
+
+            } catch (InputMismatchException | NumberFormatException e) {
+                System.out.println("Your choice was not a number!");
+                scanner.next(); // consume the invalid token
+            }
+
+
+        } while (promptUser);
+    }
+
+    private static void displayUsers() {
+        System.out.println();
+        System.out.println("Users Menu");
+        System.out.println("1 - Joe Flacco");
+        System.out.println("2 - Optimus 'Prime'");
+        System.out.println("3 - Delaware Guy");
+        System.out.println("4 - NY Fella");
+        System.out.println();
+    }
+
     private static void checkoutProcess() {
         if (SystemInterface.getCartItems() == null || SystemInterface.getCartItems().size() == 0) {
             System.out.println("Nothing to check out.  You have no items in your cart.");
         } else {
 
+            SystemInterface.createOrder();
             SystemInterface.printSimpleReceipt("basic");
 
             System.out.print("Would you like to see a more detailed receipt (y/n)? ");
@@ -179,7 +239,8 @@ public class UserInterface {
         System.out.println("2 - Add item to cart"); // command
         System.out.println("3 - Remove item from cart"); // command
         System.out.println("4 - Display items in cart"); // command
-        System.out.println("5 - Checkout"); // using decorater pattern
+        System.out.println("5 - Checkout"); // using command, decorater, strategy patterns
+        System.out.println("6 - Undo"); // Memento
         System.out.println("0 - Exit");
         System.out.println();
     }

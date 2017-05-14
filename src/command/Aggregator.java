@@ -3,6 +3,7 @@ package command;
 import decorator.Receipt;
 import decorator.SimpleReceipt;
 import model.AbstractItem;
+import model.Order;
 import model.ShoppingCart;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Aggregator {
     private ShoppingCart shoppingCart;
     private Receipt receipt;
+    private Order order;
 
     public Aggregator() {
         shoppingCart = new ShoppingCart();
@@ -37,5 +39,21 @@ public class Aggregator {
 
     public Receipt getReceipt() {
         return receipt;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

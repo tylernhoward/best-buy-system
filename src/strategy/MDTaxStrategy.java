@@ -6,6 +6,7 @@ package strategy;
 public class MDTaxStrategy implements TaxStrategy{
     @Override
     public double calcSalesTax(double price) {
-        return price*0.06; //sales tax in MD
+        double tax = price * 0.06; //sales tax in MD
+        return Math.round(tax * 100.0) / 100.0; // round to 2 decimal places
     }
 }

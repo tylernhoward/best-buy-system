@@ -5,6 +5,7 @@ import exceptions.CommandInterfaceException;
 import model.AbstractItem;
 import model.OnlineStore;
 import model.Order;
+import model.User;
 
 import java.util.List;
 
@@ -53,6 +54,17 @@ public class Invoker {
         }
     }
 
+    public Order createOrder(User user) {
+        command = new CMDCreateOrder(aggregator, user);
+
+        Object order = command.execute();
+        if (order instanceof Order) {
+            return (Order) order;
+        } else {
+            throw new CommandInterfaceException("Unable to determine returned object type after executing command.");
+        }
+    }
+
     public Receipt printSimpleReceipt(String type) {
 
         Receipt currentReceipt = aggregator.getReceipt();
@@ -78,7 +90,7 @@ public class Invoker {
                 break;
         }
 
-        command = new CMDPrintReceipt(aggregator.getReceipt(), new Order(OnlineStore.getInstance(), "J. Cole", aggregator.getAll()));
+        command = new CMDPrintReceipt(aggregator.getReceipt(), aggregator.getOrder());
 
         Object receipt = command.execute();
         if (receipt instanceof Receipt) {

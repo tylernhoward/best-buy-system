@@ -6,6 +6,6 @@ package strategy;
 public class DETaxStrategy implements TaxStrategy {
     @Override
     public double calcSalesTax(double price) {
-        return 0; //No sales tax
+        return 0.0; //No sales tax
     }
 }

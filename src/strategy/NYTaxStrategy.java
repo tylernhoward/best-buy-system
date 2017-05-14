@@ -6,6 +6,7 @@ package strategy;
 public class NYTaxStrategy implements TaxStrategy{
     @Override
     public double calcSalesTax(double price) {
-        return price*0.08875; //average sales tax in NYS
+        double tax = price * 0.08875; //average sales tax in NYS
+        return Math.round(tax * 100.0) / 100.0; // round to 2 decimal places
     }
 }

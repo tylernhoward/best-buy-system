@@ -15,7 +15,10 @@ public class SimpleReceipt implements Receipt {
         System.out.println("Order for: " + order.getUser());
         System.out.println("Order Placed: " + order.getDate());
         System.out.println("Best Buy Store order number: " + order.getOrderNumber().toString());
-        System.out.println("Order Total: $" + order.getOrderTotal());
+        System.out.println("Subtotal: $" + order.getSubTotal());
+        System.out.println("Sales Tax: $" + order.getSalesTax());
+        System.out.println("Shipping Cost: $" + order.getShippingCost());
+        System.out.println("Grand Order Total: $" + order.getGrandTotal());
         System.out.println();
     }
 }
