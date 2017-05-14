@@ -6,12 +6,13 @@ import model.AbstractItem;
 import model.Order;
 import model.ShoppingCart;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ehaywo1 on 3/30/2017.
  */
-public class Aggregator {
+public class Aggregator implements Serializable {
     private ShoppingCart shoppingCart;
     private Receipt receipt;
     private Order order;

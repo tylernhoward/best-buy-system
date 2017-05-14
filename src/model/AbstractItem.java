@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Created by ehaywo1 on 3/30/2017.
  */
-public abstract class AbstractItem {
+public abstract class AbstractItem implements Serializable {
 
     protected String name;
     protected double price;

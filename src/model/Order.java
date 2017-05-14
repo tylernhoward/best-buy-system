@@ -2,6 +2,7 @@ package model;
 
 import strategy.*;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.UUID;
 /**
  * Created by ealexhaywood on 5/1/17.
  */
-public class Order {
+public class Order implements Serializable {
     private OnlineStore onlineStore;
     private User user;
     private List<AbstractItem> orderedItems;

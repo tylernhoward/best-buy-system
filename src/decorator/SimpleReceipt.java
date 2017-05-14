@@ -2,12 +2,14 @@ package decorator;
 
 import model.Order;
 
+import java.io.Serializable;
+
 /**
  * Simple receipt
  *
  * Created by ealexhaywood on 4/30/17.
  */
-public class SimpleReceipt implements Receipt {
+public class SimpleReceipt implements Receipt, Serializable {
     @Override
     public void printReceipt(Order order) {
         System.out.println("***Printing Simple Receipt***");

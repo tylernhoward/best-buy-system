@@ -2,12 +2,13 @@ package model;
 
 import iterators.OnlineStoreIterator;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ehaywo1 on 3/30/2017.
  */
-public class OnlineStore {
+public class OnlineStore implements Serializable {
 
     private static OnlineStore onlineStore = new OnlineStore();
 

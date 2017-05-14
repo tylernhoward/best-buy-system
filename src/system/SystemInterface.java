@@ -3,10 +3,12 @@ package system;
 import command.Aggregator;
 import command.Invoker;
 import iterators.OnlineStoreIterator;
+import memento.Originator;
 import model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
@@ -18,12 +20,20 @@ public class SystemInterface {
     private static OnlineStore onlineStore;
     private static User user;
 
+    // Mementos
+    private static Stack<Originator.Memento> savedStates = new Stack<>();
+    private static Originator originator = new Originator();
+
     public static String addItem(int index) {
+        originator.set(invoker.getAggregator());
+        savedStates.push(originator.saveToMemento());
         AbstractItem abstractItem = invoker.addItem(onlineStore.getInventory().get(index));
         return abstractItem.toString();
     }
 
     public static String removeItem(int index) {
+        originator.set(invoker.getAggregator());
+        savedStates.push(originator.saveToMemento());
         AbstractItem abstractItem = invoker.removeItem(invoker.getAggregator().getAll().get(index));
         return abstractItem.toString();
     }
@@ -33,11 +43,14 @@ public class SystemInterface {
     }
 
     public static void printSimpleReceipt(String type) {
+        originator.set(invoker.getAggregator());
+        savedStates.push(originator.saveToMemento());
         invoker.printSimpleReceipt(type);
     }
 
-
     public static void createOrder() {
+        originator.set(invoker.getAggregator());
+        savedStates.push(originator.saveToMemento());
         invoker.createOrder(user);
     }
 
@@ -52,6 +65,16 @@ public class SystemInterface {
         }
 
         System.out.println();
+    }
+
+    public static void undo() {
+        if (savedStates.size() > 0) {
+            invoker.setAggregator(originator.restoreFromMemento(savedStates.pop()));
+            System.out.println("Your last action has been undone!  Any items, receipts, or orders " +
+                    "have been restored to their previous state");
+        } else {
+            System.out.println("Nothing to undo. No previous states saved");
+        }
     }
 
     public static void initializeOnlineStore() {

@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Created by ealexhaywood on 5/13/17.
  */
-public class User {
+public class User implements Serializable {
 
     private String name;
     private boolean isPrime;

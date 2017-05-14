@@ -1,4 +1,3 @@
-import model.User;
 import system.SystemInterface;
 
 import java.util.InputMismatchException;
@@ -59,16 +58,17 @@ public class UserInterface {
                     case 4:
                         printCartItems(SystemInterface.getCartItems());
                         break;
+
+                    // checkout, print receipt
                     case 5:
                         checkoutProcess();
                         System.out.println("Your shopping cart has been emptied and is ready for another order!");
                         SystemInterface.initialize();
                         break;
+
+                    // undo previous action
                     case 6:
-                        break;
-                    case 7:
-                        break;
-                    case 8:
+                        SystemInterface.undo();
                         break;
 
                     // exit
