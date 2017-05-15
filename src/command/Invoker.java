@@ -1,6 +1,6 @@
 package command;
 
-import decorator.*;
+import decorator.Receipt;
 import exceptions.CommandInterfaceException;
 import model.AbstractItem;
 import model.Order;
@@ -66,31 +66,7 @@ public class Invoker {
     }
 
     public Receipt printSimpleReceipt(String type) {
-
-        Receipt currentReceipt = aggregator.getReceipt();
-
-        switch (type) {
-            case "all":
-                aggregator.setReceipt(new AllItemDecorator(currentReceipt));
-                break;
-            case "clothing":
-                aggregator.setReceipt(new ClothingItemDecorator(currentReceipt));
-                break;
-            case "electronic":
-                aggregator.setReceipt(new ElectronicItemDecorator(currentReceipt));
-                break;
-            case "food":
-                aggregator.setReceipt(new FoodItemDecorator(currentReceipt));
-                break;
-            case "generic":
-                aggregator.setReceipt(new GenericItemDecorator(currentReceipt));
-                break;
-            default:
-                // do nothing
-                break;
-        }
-
-        command = new CMDPrintReceipt(aggregator.getReceipt(), aggregator.getOrder());
+        command = new CMDPrintReceipt(aggregator, type);
 
         Object receipt = command.execute();
         if (receipt instanceof Receipt) {

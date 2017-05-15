@@ -1,24 +1,48 @@
 package command;
 
-import decorator.Receipt;
-import model.Order;
+import decorator.*;
 
 /**
  * Created by ealexhaywood on 5/7/17.
  */
 public class CMDPrintReceipt implements CommandInterface {
 
-    private Receipt receipt;
-    private Order order;
+    private Aggregator aggregator;
+    private String type;
 
-    public CMDPrintReceipt(Receipt receipt, Order order) {
-        this.receipt = receipt;
-        this.order = order;
+    public CMDPrintReceipt(Aggregator aggregator, String type) {
+        this.aggregator = aggregator;
+        this.type = type;
     }
 
     @Override
     public Receipt execute() {
-        receipt.printReceipt(order);
-        return receipt;
+
+        Receipt currentReceipt = aggregator.getReceipt();
+
+        switch (type) {
+            case "all":
+                aggregator.setReceipt(new AllItemDecorator(currentReceipt));
+                break;
+            case "clothing":
+                aggregator.setReceipt(new ClothingItemDecorator(currentReceipt));
+                break;
+            case "electronic":
+                aggregator.setReceipt(new ElectronicItemDecorator(currentReceipt));
+                break;
+            case "food":
+                aggregator.setReceipt(new FoodItemDecorator(currentReceipt));
+                break;
+            case "generic":
+                aggregator.setReceipt(new GenericItemDecorator(currentReceipt));
+                break;
+            default:
+                // do nothing
+                break;
+        }
+
+        Receipt newReceipt = aggregator.getReceipt();
+        newReceipt.printReceipt(aggregator.getOrder());
+        return newReceipt;
     }
 }
