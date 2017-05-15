@@ -160,7 +160,7 @@ public class SystemInterface {
         user = new User("NY Fella", false, "New York");
     }
 
-    public static User getUser() {
-        return user;
+    public static String getUser() {
+        return user.toString();
     }
 }
