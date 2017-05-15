@@ -11,6 +11,8 @@ public class Originator {
 
     private Aggregator aggregator;
 
+    public Originator() {}
+
     public void set(Aggregator aggregator) {
         this.aggregator = aggregator;
     }
