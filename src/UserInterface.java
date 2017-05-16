@@ -104,18 +104,22 @@ public class UserInterface {
                 int choice = scanner.nextInt();
 
                 switch (choice) {
+                    // login as Joe Flacco (MD Customer)
                     case 1:
                         SystemInterface.loginAsJoe();
                         promptUser = false;
                         break;
+                    // login as Prime customer
                     case 2:
                         SystemInterface.loginAsPrime();
                         promptUser = false;
                         break;
+                    // login as DE customer
                     case 3:
                         SystemInterface.loginAsDelaware();
                         promptUser = false;
                         break;
+                    // login as NY customer
                     case 4:
                         SystemInterface.loginAsNY();
                         promptUser = false;
@@ -152,7 +156,10 @@ public class UserInterface {
             System.out.println("Nothing to check out.  You have no items in your cart.");
         } else {
 
+            // create order object
             SystemInterface.createOrder();
+
+            // print basic receipt
             SystemInterface.printSimpleReceipt("basic");
 
             System.out.print("Would you like to see a more detailed receipt (y/n)? ");
