@@ -39,7 +39,7 @@ public class SystemInterface {
     }
 
     public static List<String> getCartItems() {
-        return invoker.getItems().stream().map(item -> item.toString()).collect(Collectors.toList());
+        return invoker.getItems().stream().map(item -> item.toString()).collect(Collectors.toList()); // Java 8 just for fun :P
     }
 
     public static void printSimpleReceipt(String type) {
