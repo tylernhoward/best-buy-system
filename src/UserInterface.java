@@ -156,6 +156,13 @@ public class UserInterface {
             System.out.println("Nothing to check out.  You have no items in your cart.");
         } else {
 
+            System.out.print("Would you like to add First Class shipping to this package (y/n)?");
+            Scanner scanner = new Scanner(System.in);
+            String wantsFirstClass = scanner.next();
+            if (wantsFirstClass.equalsIgnoreCase("y")) {
+                SystemInterface.setFirstClass();
+            }
+
             // create order object
             SystemInterface.createOrder();
 
@@ -163,7 +170,6 @@ public class UserInterface {
             SystemInterface.printSimpleReceipt("basic");
 
             System.out.print("Would you like to see a more detailed receipt (y/n)? ");
-            Scanner scanner = new Scanner(System.in);
             String wantsReceipt = scanner.next();
 
             if (wantsReceipt.equalsIgnoreCase("y")) {
