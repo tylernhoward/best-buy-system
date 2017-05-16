@@ -145,22 +145,24 @@ public class SystemInterface {
     }
 
     public static void loginAsJoe() {
-        user = new User("Joe Flacco", false, "Maryland");
+        user = new User("Joe Flacco", false, "Maryland",false);
     }
 
     public static void loginAsPrime() {
-        user = new User("Optimus Prime", true, "Maryland");
+        user = new User("Optimus Prime", true, "Maryland",false);
     }
 
     public static void loginAsDelaware() {
-        user = new User("Delaware Guy", false, "Delaware");
+        user = new User("Delaware Guy", false, "Delaware",false);
     }
 
     public static void loginAsNY() {
-        user = new User("NY Fella", false, "New York");
+        user = new User("NY Fella", false, "New York",false);
     }
 
     public static String getUser() {
         return user.toString();
     }
+
+    public static void setFirstClass(){user.setFirstClass(true);}
 }

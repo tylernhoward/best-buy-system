@@ -57,10 +57,15 @@ public class Order implements Serializable {
     }
 
     private ShippingStrategy determineShippingStrategy(User user) {
-        if (user.isPrime()) {
+        if(user.isFirstClass()){
+            return new FirstClassShippingStrategy();
+        }
+        else if (user.isPrime()){
             return new PrimeShippingStrategy();
         }
-        return new RegularShippingStrategy();
+        else{
+            return new RegularShippingStrategy();
+        }
     }
 
     private double calculateSubTotal(List<AbstractItem> orderedItems) {
