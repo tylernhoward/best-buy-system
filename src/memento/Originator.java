@@ -47,6 +47,7 @@ public class Originator {
             }
         }
 
+        // Deserialize from byte array back to aggregator
         public Aggregator getSavedState() {
             ByteArrayInputStream bais = new ByteArrayInputStream(byteData);
             Object aggregator = null;
